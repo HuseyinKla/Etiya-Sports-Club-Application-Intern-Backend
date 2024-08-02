@@ -26,7 +26,7 @@ public class UserEntity {
 
     private String userName;
     private String name;
-    private String eMail;
+    private String email;
     private String password;
     private Timestamp createdAt;
 
