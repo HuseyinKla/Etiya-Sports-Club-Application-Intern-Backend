@@ -1,6 +1,7 @@
 package com.example.EtiyaSportsClub.mappers;
 
 import com.example.EtiyaSportsClub.dtos.CourseGetDto;
+import com.example.EtiyaSportsClub.dtos.CoursesByBundleIdDto;
 import com.example.EtiyaSportsClub.entities.CourseEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,6 +18,7 @@ public interface ICourseGetMapper {
     @Mapping(source = "bundle.bundleId", target = "bundleId")
     CourseGetDto courseToGetCourseDto(CourseEntity course);
     List<CourseGetDto> coursestoGetAllCoursesDto(List<CourseEntity> courses);
+    List<CoursesByBundleIdDto> getAllCoursesByBundleId(List<CourseEntity> courses);
 
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/test/logs")
+@RequestMapping("/api/logs")
 public class LogController {
 
     @Autowired

@@ -73,20 +73,19 @@ public class UserService {
         userRepository.deleteAll();
     }
 
-    public Optional<UserEntity> findUserByEmail(String email) {
+    public UserGetDto findUserByEmail(String email) {
         Optional<UserEntity> foundedUser = userRepository.findByEmail(email);
         if (foundedUser.isPresent()){
-            return foundedUser;
+            return IUserGetMapper.INSTANCE.userToGetUserDto(foundedUser.get());
         }else{
             throw new RuntimeException("User Not Found");
         }
     }
 
-    public UserEntity findUserByEmailPost(LoginDto loginDto) {
-        Optional<UserEntity> foundedUser = userRepository.findByEmail(loginDto.getUsername());
+    public UserGetDto findUserByUsernameAndPasswordPost(LoginDto loginDto) {
+        Optional<UserEntity> foundedUser = userRepository.findByUserNameAndPassword(loginDto.getUsername(), loginDto.getPassword());
         if (foundedUser.isPresent()){
-            UserEntity user = foundedUser.get();
-            return user;
+            return IUserGetMapper.INSTANCE.userToGetUserDto(foundedUser.get());
         }else{
             throw new RuntimeException("User Not Found");
         }

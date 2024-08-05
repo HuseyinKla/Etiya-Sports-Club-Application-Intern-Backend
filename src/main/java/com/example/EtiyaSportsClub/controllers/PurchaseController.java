@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/test/purchases")
+@RequestMapping("/api/purchases")
 public class PurchaseController {
 
     PurchaseService purchaseService;

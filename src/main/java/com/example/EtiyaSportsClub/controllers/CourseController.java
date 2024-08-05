@@ -1,6 +1,7 @@
 package com.example.EtiyaSportsClub.controllers;
 
 import com.example.EtiyaSportsClub.dtos.CourseGetDto;
+import com.example.EtiyaSportsClub.dtos.CoursesByBundleIdDto;
 import com.example.EtiyaSportsClub.entities.CourseEntity;
 import com.example.EtiyaSportsClub.services.CourseService;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/test/courses")
+@RequestMapping("/api/courses")
 public class CourseController {
 
     CourseService courseService;
@@ -30,6 +31,11 @@ public class CourseController {
     @PostMapping
     public CourseEntity createCourse(@RequestBody CourseEntity newCourse){
         return courseService.creteCourse(newCourse);
+    }
+
+    @GetMapping("/bundle/{bundleId}")
+    public CoursesByBundleIdDto getCoursesByBundleId(@PathVariable Long bundleId){
+        return courseService.getCoursesByBundleId(bundleId);
     }
 
     @DeleteMapping("/{courseId}")

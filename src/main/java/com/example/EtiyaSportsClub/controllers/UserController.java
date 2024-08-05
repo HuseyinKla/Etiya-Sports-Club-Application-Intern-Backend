@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/test/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -32,13 +32,13 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public Optional<UserEntity> findUserByEmail(@PathVariable String email){
+    public UserGetDto findUserByEmail(@PathVariable String email){
         return userService.findUserByEmail(email);
     }
 
     @PostMapping("/email")
-    public UserEntity findUserByEmailPost(@RequestBody LoginDto loginDto){
-        return userService.findUserByEmailPost(loginDto);
+    public UserGetDto findUserByUsernameAndPasswordPost(@RequestBody LoginDto loginDto){
+        return userService.findUserByUsernameAndPasswordPost(loginDto);
     }
 
 
