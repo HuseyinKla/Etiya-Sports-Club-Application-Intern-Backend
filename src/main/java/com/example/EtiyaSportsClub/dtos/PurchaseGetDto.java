@@ -18,5 +18,6 @@ public class PurchaseGetDto {
     private Long bundleId;
     private String bundleName;
     private int bundlePrice;
+    private int totalLessonNumber;
     private Timestamp purchaseDate;
 }

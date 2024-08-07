@@ -20,6 +20,7 @@ public interface IPurchaseGetMapper {
     @Mapping(source = "bundle.bundleId", target = "bundleId")
     @Mapping(source = "bundle.bundleName", target = "bundleName")
     @Mapping(source = "bundle.bundlePrice", target = "bundlePrice")
+    @Mapping(source = "bundle.totalLessonNumber", target = "totalLessonNumber")
     PurchaseGetDto purchaseToGetPurchaseDto(PurchaseEntity purchase);
     List<PurchaseGetDto> purchasesToGetAllPurchasesDto(List<PurchaseEntity> purchases);
 

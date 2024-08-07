@@ -1,6 +1,7 @@
 package com.example.EtiyaSportsClub.mappers;
 
 import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,4 +19,13 @@ public interface IProgressGetMapper {
     @Mapping(source = "user.userId", target = "userId")
     ProgressGetDto progressToGetProgressDto(ProgressEntity progress);
     List<ProgressGetDto> progressesToGetAllProgressesDto(List<ProgressEntity> progresses);
+
+
+    @Mapping(source = "user.userName", target = "username")
+    @Mapping(source = "bundle.bundleName", target = "bundleName")
+    @Mapping(source = "bundle.bundleDescription", target = "bundleDescription")
+    @Mapping(source = "bundle.totalLessonNumber", target = "totalLessonNumber")
+    @Mapping(source = "remainingCourseNumber", target = "remainingCourseNumber")
+    ProgressForCalendar progressToProgressForCalendar(ProgressEntity progress);
+
 }

@@ -15,6 +15,8 @@ public class BuyBundleDto {
     private String username;
     private Long bundleId;
     private Timestamp purchaseDate;
+    private int totalLessonNumber;
+
 
 
 

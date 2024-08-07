@@ -23,4 +23,13 @@ public class ProgressEntity {
 
 
     private int remainingCourseNumber;
+
+    @Enumerated(EnumType.ORDINAL)
+    private ProgressEntity.processStatus processStatus;
+
+    public enum processStatus {
+        NOT,
+        PROCESSING,
+        FINISHED
+    }
 }

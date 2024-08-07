@@ -24,5 +24,7 @@ public class PurchaseEntity {
     private BundleEntity bundle;
 
     private Timestamp purchaseDate;
+    private int totalLessonNumber;
+
 }
 

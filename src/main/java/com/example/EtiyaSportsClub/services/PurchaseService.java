@@ -1,19 +1,24 @@
 package com.example.EtiyaSportsClub.services;
 
+import com.example.EtiyaSportsClub.controllers.ProgressController;
 import com.example.EtiyaSportsClub.dtos.BundlesByUserId;
 import com.example.EtiyaSportsClub.dtos.BuyBundleDto;
 import com.example.EtiyaSportsClub.dtos.PurchaseGetDto;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
+import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import com.example.EtiyaSportsClub.entities.PurchaseEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.mappers.IPurchaseGetMapper;
 import com.example.EtiyaSportsClub.repos.IBundleRepository;
+import com.example.EtiyaSportsClub.repos.IProgressRepository;
 import com.example.EtiyaSportsClub.repos.IPurchaseRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -29,9 +34,18 @@ public class PurchaseService {
     @Autowired
     private IBundleRepository bundleRepository;
 
-    public PurchaseService(IPurchaseRepository purchaseRepository, IUserRepository userRepository, IBundleRepository bundleRepository){
+    @Autowired
+    ProgressService progressService;
+
+    @Autowired
+    IProgressRepository progressRepository;
+
+
+    public PurchaseService(IPurchaseRepository purchaseRepository, IUserRepository userRepository, IBundleRepository bundleRepository, ProgressService progressService, IProgressRepository progressRepository){
         this.purchaseRepository = purchaseRepository;
         this.userRepository = userRepository;
+        this.progressService = progressService;
+        this.progressRepository = progressRepository;
     }
 
     public List<PurchaseGetDto> getAllPurchasesDto() {
@@ -63,6 +77,22 @@ public class PurchaseService {
         newPurchase.setUser(foundedUser);
         newPurchase.setBundle(foundedBundle);
         newPurchase.setPurchaseDate(buyBundleDto.getPurchaseDate());
+        newPurchase.setTotalLessonNumber(buyBundleDto.getTotalLessonNumber());
+
+        /*Map<String, Object> newProgress = new HashMap<>();
+        Map<String, Object> user = new HashMap<>();
+        Map<String, Object> bundle = new HashMap<>();
+
+        bundle.put("bundleId", foundedBundle.getBundleId());
+        user.put("userId", foundedUser.getUserId());
+        newProgress.put("user", user);
+        newProgress.put("bundle", bundle);
+        newProgress.put("remainingCourseNumber", foundedBundle.getTotalLessonNumber());
+        newProgress.put("processStatus", ProgressEntity.processStatus.NOT);
+
+        //ProgressEntity newProgress = new ProgressEntity(foundedUser.getUserId(), foundedBundle.getBundleId(), foundedBundle.getTotalLessonNumber(), ProgressEntity.processStatus.NOT);
+        ProgressEntity progress = new ProgressEntity(foundedUser, foundedBundle, foundedBundle.getTotalLessonNumber(), ProgressEntity.processStatus.NOT);
+        progressRepository.save(progress);*/
 
         PurchaseEntity savedPurchase = purchaseRepository.save(newPurchase);
         return IPurchaseGetMapper.INSTANCE.purchaseToGetPurchaseDto(savedPurchase);

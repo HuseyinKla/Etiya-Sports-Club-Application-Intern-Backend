@@ -4,7 +4,9 @@ import com.example.EtiyaSportsClub.dtos.BundlesByUserId;
 import com.example.EtiyaSportsClub.dtos.BuyBundleDto;
 import com.example.EtiyaSportsClub.dtos.PurchaseGetDto;
 import com.example.EtiyaSportsClub.entities.PurchaseEntity;
+import com.example.EtiyaSportsClub.services.ProgressService;
 import com.example.EtiyaSportsClub.services.PurchaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,10 @@ import java.util.List;
 @RequestMapping("/api/purchases")
 public class PurchaseController {
 
+    @Autowired
     PurchaseService purchaseService;
+    @Autowired
+    ProgressService progressService;
 
     public PurchaseController(PurchaseService purchaseService){
         this.purchaseService = purchaseService;
