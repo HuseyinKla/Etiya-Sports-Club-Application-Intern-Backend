@@ -4,17 +4,22 @@ import com.example.EtiyaSportsClub.controllers.ProgressController;
 import com.example.EtiyaSportsClub.dtos.BundlesByUserId;
 import com.example.EtiyaSportsClub.dtos.BuyBundleDto;
 import com.example.EtiyaSportsClub.dtos.PurchaseGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import com.example.EtiyaSportsClub.entities.PurchaseEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
+import com.example.EtiyaSportsClub.mappers.IProgressGetMapper;
 import com.example.EtiyaSportsClub.mappers.IPurchaseGetMapper;
 import com.example.EtiyaSportsClub.repos.IBundleRepository;
 import com.example.EtiyaSportsClub.repos.IProgressRepository;
 import com.example.EtiyaSportsClub.repos.IPurchaseRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,12 +45,17 @@ public class PurchaseService {
     @Autowired
     IProgressRepository progressRepository;
 
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public PurchaseService(IPurchaseRepository purchaseRepository, IUserRepository userRepository, IBundleRepository bundleRepository, ProgressService progressService, IProgressRepository progressRepository){
+
+
+    public PurchaseService(IPurchaseRepository purchaseRepository, IUserRepository userRepository, IBundleRepository bundleRepository, ProgressService progressService, IProgressRepository progressRepository, RestTemplate restTemplate){
         this.purchaseRepository = purchaseRepository;
         this.userRepository = userRepository;
         this.progressService = progressService;
         this.progressRepository = progressRepository;
+        this.restTemplate = restTemplate;
     }
 
     public List<PurchaseGetDto> getAllPurchasesDto() {
@@ -66,6 +76,7 @@ public class PurchaseService {
         return purchaseRepository.save(newPurchase);
     }
 
+    @Transactional
     public PurchaseGetDto buyBundle(BuyBundleDto buyBundleDto) {
         UserEntity foundedUser = userRepository.findByUserName(buyBundleDto.getUsername())
                 .orElseThrow(() -> new RuntimeException("User Not Found"));
@@ -79,6 +90,23 @@ public class PurchaseService {
         newPurchase.setPurchaseDate(buyBundleDto.getPurchaseDate());
         newPurchase.setTotalLessonNumber(buyBundleDto.getTotalLessonNumber());
 
+        PurchaseEntity savedPurchase = purchaseRepository.save(newPurchase);
+
+
+
+        /*String urlProgressCreate = "http://localhost:8080/api/progresses";
+        InitialProgressDto newProgress = new InitialProgressDto();
+        newProgress.setUserId(foundedUser.getUserId());
+        newProgress.setBundleId(foundedBundle.getBundleId());
+        newProgress.setTotalLessonNumber(foundedBundle.getTotalLessonNumber());
+        newProgress.setProcessStatus(ProgressEntity.processStatus.NOT);
+
+
+
+        progressRepository.save(IProgressGetMapper.INSTANCE.initialProgressDtoToProgressEntity(newProgress));
+
+        ResponseEntity<ProgressEntity> progressResponse = restTemplate.postForEntity(urlProgressCreate, newProgress, ProgressEntity.class);*/
+
         /*Map<String, Object> newProgress = new HashMap<>();
         Map<String, Object> user = new HashMap<>();
         Map<String, Object> bundle = new HashMap<>();
@@ -88,13 +116,17 @@ public class PurchaseService {
         newProgress.put("user", user);
         newProgress.put("bundle", bundle);
         newProgress.put("remainingCourseNumber", foundedBundle.getTotalLessonNumber());
-        newProgress.put("processStatus", ProgressEntity.processStatus.NOT);
+        newProgress.put("processStatus", ProgressEntity.processStatus.NOT);*/
 
         //ProgressEntity newProgress = new ProgressEntity(foundedUser.getUserId(), foundedBundle.getBundleId(), foundedBundle.getTotalLessonNumber(), ProgressEntity.processStatus.NOT);
-        ProgressEntity progress = new ProgressEntity(foundedUser, foundedBundle, foundedBundle.getTotalLessonNumber(), ProgressEntity.processStatus.NOT);
-        progressRepository.save(progress);*/
+        //ProgressEntity progress = new ProgressEntity(foundedUser, foundedBundle, foundedBundle.getTotalLessonNumber(), ProgressEntity.processStatus.NOT);
+        //progressRepository.save(progress);
 
-        PurchaseEntity savedPurchase = purchaseRepository.save(newPurchase);
+
+
+
+
+
         return IPurchaseGetMapper.INSTANCE.purchaseToGetPurchaseDto(savedPurchase);
     }
 
@@ -117,6 +149,19 @@ public class PurchaseService {
                         bundles.setBundleDescription(bundle.getBundle().getBundleDescription());
                         bundles.setTotalLessonNumber(bundle.getBundle().getTotalLessonNumber());
                         bundles.setPurchaseDate(bundle.getPurchaseDate());
+
+                        Optional<ProgressEntity> progress =  progressRepository.findByUser_UserIdAndBundle_BundleId(foundedUser.get().getUserId(), bundle.getBundle().getBundleId());
+                        if (progress.isPresent()){
+                            if (progress.get().getRemainingCourseNumber() == 0){
+                                bundles.setProcessStatus(ProgressEntity.processStatus.FINISHED);
+                            }else{
+                                bundles.setProcessStatus(ProgressEntity.processStatus.PROCESSING);
+                            }
+                        }else{
+                            bundles.setProcessStatus(ProgressEntity.processStatus.NOT);
+                        }
+
+
                         return bundles;
                     })
                     .collect(Collectors.toList());

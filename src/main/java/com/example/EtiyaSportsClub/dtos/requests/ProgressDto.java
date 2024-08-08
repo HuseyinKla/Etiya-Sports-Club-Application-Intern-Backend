@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InitialProgressDto {
+public class ProgressDto {
 
-    private String username;
+    private Long userId;
     private Long bundleId;
     private int remainingCourseNumber;
     private ProgressEntity.processStatus processStatus;

@@ -3,6 +3,8 @@ package com.example.EtiyaSportsClub.mappers;
 import com.example.EtiyaSportsClub.dtos.BundlesByUserId;
 import com.example.EtiyaSportsClub.dtos.BuyBundleDto;
 import com.example.EtiyaSportsClub.dtos.PurchaseGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
+import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import com.example.EtiyaSportsClub.entities.PurchaseEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -26,6 +28,9 @@ public interface IPurchaseGetMapper {
 
     PurchaseGetDto purchasePostDto(BuyBundleDto bundleDto);
     PurchaseEntity purchaseGetDtoToPurchaseEntity(PurchaseGetDto purchaseGetDto);
+
+
+
 
 
     @Mapping(source = "bundle.bundleId", target = "bundleId")

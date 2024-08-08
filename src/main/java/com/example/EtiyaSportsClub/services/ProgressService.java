@@ -2,13 +2,17 @@ package com.example.EtiyaSportsClub.services;
 
 import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
+import com.example.EtiyaSportsClub.dtos.requests.ProgressDto;
 import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
+import com.example.EtiyaSportsClub.entities.BundleEntity;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.mappers.IProgressGetMapper;
+import com.example.EtiyaSportsClub.repos.IBundleRepository;
 import com.example.EtiyaSportsClub.repos.IProgressRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -22,13 +26,15 @@ public class ProgressService {
     IProgressRepository progressRepository;
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    IBundleRepository bundleRepository;
 
 
 
-
-    public ProgressService(IProgressRepository progressRepository, IUserRepository userRepository){
+    public ProgressService(IProgressRepository progressRepository, IUserRepository userRepository, IBundleRepository bundleRepository){
         this.progressRepository = progressRepository;
         this.userRepository = userRepository;
+        this.bundleRepository = bundleRepository;
     }
 
 
@@ -48,8 +54,24 @@ public class ProgressService {
         }
     }
 
-    public ProgressEntity createProgress(ProgressEntity newProgress) {
-        return progressRepository.save(newProgress);
+    public ProgressEntity createProgress(InitialProgressDto newProgress) {
+
+        Optional<UserEntity> foundedUser = userRepository.findByUserName(newProgress.getUsername());
+        if (foundedUser.isPresent()){
+            ProgressDto newProgressDto = new ProgressDto();
+
+            newProgressDto.setUserId(foundedUser.get().getUserId());
+            newProgressDto.setProcessStatus(newProgress.getProcessStatus());
+            newProgressDto.setBundleId(newProgress.getBundleId());
+            newProgressDto.setRemainingCourseNumber(newProgress.getRemainingCourseNumber());
+
+            ProgressEntity newProgressEntity = IProgressGetMapper.INSTANCE.initialProgressDtoToProgressEntity(newProgressDto);
+            return progressRepository.save(newProgressEntity);
+        }else{
+            throw new RuntimeException("User not found");
+        }
+
+
     }
 
 
@@ -80,5 +102,27 @@ public class ProgressService {
             throw new RuntimeException("User Not Found");
         }
 
+    }
+
+    public ProgressEntity initProgress(InitialProgressDto newProgress) {
+        Optional<UserEntity> foundedUser = userRepository.findByUserName(newProgress.getUsername());
+        if (foundedUser.isPresent()) {
+            ProgressEntity progressEntity = new ProgressEntity();
+            progressEntity.setUser(foundedUser.get()); // Manuel olarak UserEntity atama
+            BundleEntity bundle = bundleRepository.findById(newProgress.getBundleId())
+                    .orElseThrow(() -> new RuntimeException("Bundle not found"));
+            progressEntity.setBundle(bundle); // Manuel olarak BundleEntity atama
+
+            progressEntity.setRemainingCourseNumber(newProgress.getRemainingCourseNumber());
+            progressEntity.setProcessStatus(ProgressEntity.processStatus.PROCESSING);
+
+            try {
+                return progressRepository.save(progressEntity);
+            }catch (Exception e){
+                return (ProgressEntity) ResponseEntity.badRequest();
+            }
+        } else {
+            throw new RuntimeException("User not found");
+        }
     }
 }
