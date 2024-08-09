@@ -1,6 +1,7 @@
 package com.example.EtiyaSportsClub.controllers;
 
 import com.example.EtiyaSportsClub.dtos.LogGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.LogCreateDto;
 import com.example.EtiyaSportsClub.entities.LogEntity;
 import com.example.EtiyaSportsClub.services.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,8 @@ public class LogController {
     }
 
     @PostMapping
-    public LogEntity createNewLog(@RequestBody LogEntity newLog){
+    public LogGetDto createNewLog(@RequestBody LogCreateDto newLog){
         return logService.createNewLog(newLog);
-
     }
 
 }

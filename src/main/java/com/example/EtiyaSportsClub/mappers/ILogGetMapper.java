@@ -14,8 +14,11 @@ public interface ILogGetMapper {
     ILogGetMapper INSTANCE = Mappers.getMapper(ILogGetMapper.class);
 
 
-    @Mapping(source = "user.userId", target = "userId")
+    @Mapping(source = "user.userName", target = "username")
     LogGetDto logToGetLogDto(LogEntity log);
     List<LogGetDto> logsToGetAllLogsDto(List<LogEntity> logs);
+
+
+    LogEntity logGetDtoToLogEntity(LogGetDto logGetDto);
 
 }

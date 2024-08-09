@@ -2,6 +2,7 @@ package com.example.EtiyaSportsClub.services;
 
 import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
+import com.example.EtiyaSportsClub.dtos.requests.ProgressBundleDto;
 import com.example.EtiyaSportsClub.dtos.requests.ProgressDto;
 import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
@@ -108,10 +109,10 @@ public class ProgressService {
         Optional<UserEntity> foundedUser = userRepository.findByUserName(newProgress.getUsername());
         if (foundedUser.isPresent()) {
             ProgressEntity progressEntity = new ProgressEntity();
-            progressEntity.setUser(foundedUser.get()); // Manuel olarak UserEntity atama
+            progressEntity.setUser(foundedUser.get());
             BundleEntity bundle = bundleRepository.findById(newProgress.getBundleId())
                     .orElseThrow(() -> new RuntimeException("Bundle not found"));
-            progressEntity.setBundle(bundle); // Manuel olarak BundleEntity atama
+            progressEntity.setBundle(bundle);
 
             progressEntity.setRemainingCourseNumber(newProgress.getRemainingCourseNumber());
             progressEntity.setProcessStatus(ProgressEntity.processStatus.PROCESSING);
@@ -124,5 +125,24 @@ public class ProgressService {
         } else {
             throw new RuntimeException("User not found");
         }
+    }
+
+    public ProgressForCalendar updateProgressBundle(ProgressBundleDto progressBundleDto) {
+        UserEntity foundedUser = userRepository.findByUserName(progressBundleDto.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        ProgressEntity foundedProgress = progressRepository.findByUser_UserIdAndProcessStatus(foundedUser.getUserId(), ProgressEntity.processStatus.PROCESSING)
+                .orElseThrow(() -> new RuntimeException("Progress not found"));
+
+        /*ProgressEntity foundedProgress = progressRepository.findByUser_UserIdAndBundle_BundleId(foundedUser.getUserId(), progressBundleDto.getBundleId())
+                .orElseThrow(() -> new RuntimeException("Progress not found"));*/
+        if (foundedProgress.getRemainingCourseNumber() == 1){
+            foundedProgress.setRemainingCourseNumber(0);
+            foundedProgress.setProcessStatus(ProgressEntity.processStatus.FINISHED);
+        }else{
+            foundedProgress.setRemainingCourseNumber(foundedProgress.getRemainingCourseNumber() - 1);
+        }
+        progressRepository.save(foundedProgress);
+
+        return IProgressGetMapper.INSTANCE.progressToProgressForCalendar(foundedProgress);
     }
 }

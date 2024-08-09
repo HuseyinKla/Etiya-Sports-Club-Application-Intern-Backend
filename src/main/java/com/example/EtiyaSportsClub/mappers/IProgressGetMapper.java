@@ -2,6 +2,7 @@ package com.example.EtiyaSportsClub.mappers;
 
 import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
+import com.example.EtiyaSportsClub.dtos.requests.ProgressBundleDto;
 import com.example.EtiyaSportsClub.dtos.requests.ProgressDto;
 import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;

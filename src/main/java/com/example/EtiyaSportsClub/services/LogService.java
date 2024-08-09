@@ -1,12 +1,17 @@
 package com.example.EtiyaSportsClub.services;
 
 import com.example.EtiyaSportsClub.dtos.LogGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.LogCreateDto;
 import com.example.EtiyaSportsClub.entities.LogEntity;
+import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.mappers.ILogGetMapper;
 import com.example.EtiyaSportsClub.repos.ILogRepository;
+import com.example.EtiyaSportsClub.repos.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +20,12 @@ public class LogService {
 
     @Autowired
     private ILogRepository logRepository;
+    @Autowired
+    private IUserRepository userRepository;
 
-    public LogService(ILogRepository logRepository){
+    public LogService(ILogRepository logRepository, IUserRepository userRepository){
         this.logRepository = logRepository;
+        this.userRepository= userRepository;
     }
 
     public List<LogGetDto> getAllLogsDto() {
@@ -27,8 +35,23 @@ public class LogService {
         return ILogGetMapper.INSTANCE.logsToGetAllLogsDto(logs);
     }
 
-    public LogEntity createNewLog(LogEntity newLog) {
-        return logRepository.save(newLog);
+    public LogGetDto createNewLog(LogCreateDto logInfo) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        UserEntity foundedUser = userRepository.findByUserName(logInfo.getUsername())
+                .orElseThrow(() -> new RuntimeException("User Not found"));
+
+        LogGetDto newLog = new LogGetDto();
+        newLog.setLogDate(timestamp);
+        newLog.setAction(logInfo.getAction());
+        newLog.setUsername(logInfo.getUsername());
+
+        LogEntity newLogEntity = new LogEntity();
+        newLogEntity.setLogDate(timestamp);
+        newLogEntity.setAction(logInfo.getAction());
+        newLogEntity.setUser(foundedUser);
+
+        logRepository.save(newLogEntity);
+        return newLog;
     }
 
     public LogGetDto findOneLogDto(Long logId) {

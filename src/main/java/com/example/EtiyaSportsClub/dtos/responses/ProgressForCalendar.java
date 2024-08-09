@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProgressForCalendar {
-    String username;
-    String bundleName;
-    String bundleDescription;
-    int totalLessonNumber;
-    int remainingCourseNumber;
+    private String username;
+    private String bundleName;
+    private String bundleDescription;
+    private int totalLessonNumber;
+    private int remainingCourseNumber;
 }

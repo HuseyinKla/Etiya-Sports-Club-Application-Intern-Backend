@@ -157,6 +157,7 @@ public class PurchaseService {
                             }else{
                                 bundles.setProcessStatus(ProgressEntity.processStatus.PROCESSING);
                             }
+                            bundles.setRemainingCourseNumber(progress.get().getRemainingCourseNumber());
                         }else{
                             bundles.setProcessStatus(ProgressEntity.processStatus.NOT);
                         }

@@ -2,6 +2,7 @@ package com.example.EtiyaSportsClub.controllers;
 
 import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
+import com.example.EtiyaSportsClub.dtos.requests.ProgressBundleDto;
 import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import com.example.EtiyaSportsClub.services.ProgressService;
@@ -51,6 +52,13 @@ public class ProgressController {
     public ProgressEntity updateProgress(@PathVariable Long progressId, @RequestBody ProgressEntity newProgress){
         return progressService.updateProgress(progressId, newProgress);
     }
+
+    @PutMapping("/updateProgressBundle")
+    public ProgressForCalendar updateProgressBundle(@RequestBody ProgressBundleDto progressBundleDto){
+        return progressService.updateProgressBundle(progressBundleDto);
+    }
+
+
 
     @DeleteMapping("/{progressId}")
     public void deleteProgress(@PathVariable Long progressId){

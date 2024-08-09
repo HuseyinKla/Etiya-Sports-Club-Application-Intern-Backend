@@ -17,6 +17,7 @@ public class BundlesByUserId {
     private int bundlePrice;
     private String bundleDescription;
     private int totalLessonNumber;
+    private int remainingCourseNumber;
     private Timestamp purchaseDate;
     private ProgressEntity.processStatus processStatus;
 }
