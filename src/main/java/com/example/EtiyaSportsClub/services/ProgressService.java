@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProgressService {
@@ -144,5 +145,13 @@ public class ProgressService {
         progressRepository.save(foundedProgress);
 
         return IProgressGetMapper.INSTANCE.progressToProgressForCalendar(foundedProgress);
+    }
+
+    public List<ProgressGetDto> getAllProgressByActivity() {
+        List<ProgressEntity> allProgresses = progressRepository.findAll().stream()
+                .filter(progress -> progress.getRemainingCourseNumber() != 0)
+                .collect(Collectors.toList());
+
+        return IProgressGetMapper.INSTANCE.progressesToGetAllProgressesDto(allProgresses);
     }
 }

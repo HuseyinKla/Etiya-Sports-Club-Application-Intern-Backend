@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 public class BundlesByUserId {
     private Long bundleId;
     private String bundleName;
-    private int bundlePrice;
+    private double bundlePrice;
     private String bundleDescription;
     private int totalLessonNumber;
     private int remainingCourseNumber;

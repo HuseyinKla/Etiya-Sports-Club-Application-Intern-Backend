@@ -32,6 +32,12 @@ public class ProgressController {
         return progressService.getOneProgressDto(progressId);
     }
 
+    @GetMapping("/active")
+    public List<ProgressGetDto> getAllProgressByActivity(){
+        return progressService.getAllProgressByActivity();
+    }
+
+
     /*@GetMapping("/{username}")
     public ProgressForCalendar getProgressByUsername(@PathVariable String username){
         return progressService.getProgressByUsername(username);

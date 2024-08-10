@@ -17,7 +17,7 @@ public class PurchaseGetDto {
     private String name;
     private Long bundleId;
     private String bundleName;
-    private int bundlePrice;
+    private double bundlePrice;
     private int totalLessonNumber;
     private Timestamp purchaseDate;
 }

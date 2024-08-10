@@ -1,8 +1,14 @@
 package com.example.EtiyaSportsClub.controllers;
 
 import com.example.EtiyaSportsClub.dtos.BundleGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.BundleWithCoursesDTO;
+import com.example.EtiyaSportsClub.dtos.responses.BundleCreateDto;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
+import com.example.EtiyaSportsClub.entities.CourseEntity;
+import com.example.EtiyaSportsClub.entities.UserEntity;
+import com.example.EtiyaSportsClub.repos.IUserRepository;
 import com.example.EtiyaSportsClub.services.BundleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +17,15 @@ import java.util.List;
 @RequestMapping("/api/bundles")
 public class BundleController {
 
+    @Autowired
     BundleService bundleService;
+    @Autowired
+    IUserRepository userRepository;
 
-    public BundleController(BundleService bundleService){
+
+    public BundleController(BundleService bundleService, IUserRepository userRepository){
         this.bundleService = bundleService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -27,9 +38,35 @@ public class BundleController {
         return bundleService.getOneBundleDto(bundleId);
     }
 
-    @PostMapping
+    @GetMapping("adminBundles/{username}")
+    public List<BundleCreateDto> getAdminBundles(@PathVariable String username){
+        return bundleService.getAdminBundles(username);
+    }
+
+
+    /*@PostMapping
     public BundleEntity createNewBundle(@RequestBody BundleEntity newBundle){
         return bundleService.createNewBundle(newBundle);
+    }*/
+
+    @PostMapping
+    public BundleCreateDto createNewBundle(@RequestBody BundleWithCoursesDTO bundleWithCoursesDTO){
+        BundleEntity newBundle = new BundleEntity();
+
+
+        newBundle.setBundleName(bundleWithCoursesDTO.getBundleName());
+        newBundle.setBundleDescription(bundleWithCoursesDTO.getBundleDescription());
+        newBundle.setBundlePrice(bundleWithCoursesDTO.getBundlePrice());
+        newBundle.setTotalLessonNumber(bundleWithCoursesDTO.getTotalLessonNumber());
+
+        UserEntity foundedUser = userRepository.findByUserName(bundleWithCoursesDTO.getUsername())
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+        newBundle.setUser(foundedUser);
+
+
+        List<CourseEntity> courses = bundleWithCoursesDTO.getCourses();
+
+        return bundleService.createNewBundle(newBundle, courses);
     }
 
 
