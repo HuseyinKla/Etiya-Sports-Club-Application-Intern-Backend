@@ -6,7 +6,9 @@ import lombok.Data;
 import java.util.Set;
 
 @Entity
-@Table(name = "RoleTable")
+@Table(name = "RoleTable", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"roleName"})
+})
 @Data
 public class RoleEntity {
 

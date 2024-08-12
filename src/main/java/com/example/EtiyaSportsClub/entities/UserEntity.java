@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "UserTable", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"eMail"}),
+        @UniqueConstraint(columnNames = {"email"}),
         @UniqueConstraint(columnNames = {"userName"})
 })
 @Data
@@ -19,7 +19,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roleId", nullable = false)
     private RoleEntity role;
 

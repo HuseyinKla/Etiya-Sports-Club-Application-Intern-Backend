@@ -2,7 +2,9 @@ package com.example.EtiyaSportsClub.controllers;
 
 import com.example.EtiyaSportsClub.dtos.LoginDto;
 import com.example.EtiyaSportsClub.dtos.UserGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.UserCreateDto;
 import com.example.EtiyaSportsClub.entities.UserEntity;
+import com.example.EtiyaSportsClub.repos.IRoleRepository;
 import com.example.EtiyaSportsClub.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +18,12 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private IRoleRepository roleRepository;
 
-    public UserController(UserService userService){
+    public UserController(UserService userService, IRoleRepository roleRepository){
         this.userService = userService;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping
@@ -27,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserEntity createNewUser(@RequestBody UserEntity newUser){
+    public UserEntity createNewUser(@RequestBody UserCreateDto newUser){
         return userService.createNewUser(newUser);
     }
 

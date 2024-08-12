@@ -2,6 +2,8 @@ package com.example.EtiyaSportsClub.services;
 
 import com.example.EtiyaSportsClub.dtos.LoginDto;
 import com.example.EtiyaSportsClub.dtos.UserGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.UserCreateDto;
+import com.example.EtiyaSportsClub.entities.RoleEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.mappers.IUserGetMapper;
 import com.example.EtiyaSportsClub.repos.IBundleRepository;
@@ -10,12 +12,12 @@ import com.example.EtiyaSportsClub.repos.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
-    //add if coming data is not fit
     @Autowired
     private IUserRepository userRepository;
     @Autowired
@@ -48,8 +50,21 @@ public class UserService {
     }
 
 
-    public UserEntity createNewUser(UserEntity newUser) {
-        return userRepository.save(newUser);
+    public UserEntity createNewUser(UserCreateDto newUser) {
+        RoleEntity foundedRole = roleRepository.findByRoleName(newUser.getRolename());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        UserEntity newUserEntity = new UserEntity();
+
+        newUserEntity.setUserName(newUser.getUsername());
+        newUserEntity.setPassword(newUser.getPassword());
+        newUserEntity.setEmail(newUser.getEmail());
+        newUserEntity.setName(newUser.getName());
+        newUserEntity.setRole(foundedRole);
+        newUserEntity.setCreatedAt(timestamp);
+
+        return userRepository.save(newUserEntity);
+
     }
 
 
