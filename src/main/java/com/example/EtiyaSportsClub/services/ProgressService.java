@@ -56,7 +56,7 @@ public class ProgressService {
         }
     }
 
-    public ProgressEntity createProgress(InitialProgressDto newProgress) {
+    /*public ProgressEntity createProgress(InitialProgressDto newProgress) {
 
         Optional<UserEntity> foundedUser = userRepository.findByUserName(newProgress.getUsername());
         if (foundedUser.isPresent()){
@@ -74,7 +74,7 @@ public class ProgressService {
         }
 
 
-    }
+    }*/
 
 
 
@@ -134,8 +134,6 @@ public class ProgressService {
         ProgressEntity foundedProgress = progressRepository.findByUser_UserIdAndProcessStatus(foundedUser.getUserId(), ProgressEntity.processStatus.PROCESSING)
                 .orElseThrow(() -> new RuntimeException("Progress not found"));
 
-        /*ProgressEntity foundedProgress = progressRepository.findByUser_UserIdAndBundle_BundleId(foundedUser.getUserId(), progressBundleDto.getBundleId())
-                .orElseThrow(() -> new RuntimeException("Progress not found"));*/
         if (foundedProgress.getRemainingCourseNumber() == 1){
             foundedProgress.setRemainingCourseNumber(0);
             foundedProgress.setProcessStatus(ProgressEntity.processStatus.FINISHED);

@@ -43,10 +43,10 @@ public class ProgressController {
         return progressService.getProgressByUsername(username);
     }*/
 
-    @PostMapping
+    /*@PostMapping
     public ProgressEntity createProgress(@RequestBody InitialProgressDto newProgress){
         return progressService.createProgress(newProgress);
-    }
+    }*/
 
     @PostMapping("/initProgress")
     public ProgressEntity initProgress(@RequestBody InitialProgressDto newProgress){

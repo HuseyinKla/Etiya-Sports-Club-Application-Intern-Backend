@@ -13,11 +13,11 @@ public class ProgressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long progressId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userId")
     private UserEntity user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bundleId")
     private BundleEntity bundle;
 
