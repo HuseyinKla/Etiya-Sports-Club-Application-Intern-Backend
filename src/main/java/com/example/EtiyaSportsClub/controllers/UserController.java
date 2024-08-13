@@ -3,6 +3,7 @@ package com.example.EtiyaSportsClub.controllers;
 import com.example.EtiyaSportsClub.dtos.LoginDto;
 import com.example.EtiyaSportsClub.dtos.UserGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.UserCreateDto;
+import com.example.EtiyaSportsClub.dtos.responses.UserDontHaveBundleDto;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.repos.IRoleRepository;
 import com.example.EtiyaSportsClub.services.UserService;
@@ -30,6 +31,12 @@ public class UserController {
     public List<UserGetDto> getAllUsersDto(){
         return userService.getAllUsersDto();
     }
+
+    @GetMapping("/withoutPurchases")
+    public List<UserDontHaveBundleDto> getUsersWithoutPurchases() {
+        return userService.getUsersWithoutPurchases();
+    }
+
 
     @PostMapping
     public UserEntity createNewUser(@RequestBody UserCreateDto newUser){

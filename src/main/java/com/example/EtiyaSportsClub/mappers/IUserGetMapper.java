@@ -2,6 +2,7 @@ package com.example.EtiyaSportsClub.mappers;
 
 
 import com.example.EtiyaSportsClub.dtos.UserGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.UserDontHaveBundleDto;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -17,5 +18,8 @@ public interface IUserGetMapper {
     @Mapping(source = "role.roleName", target = "roleName")
     UserGetDto userToGetUserDto(UserEntity user);
     List<UserGetDto> usersToGetAllUsersDto(List<UserEntity> users);
+
+
+    List<UserDontHaveBundleDto> usersToUsersDontHaveBundle(List<UserEntity> users);
 
 }

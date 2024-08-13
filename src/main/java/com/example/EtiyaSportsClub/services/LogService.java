@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LogService {
@@ -30,7 +32,9 @@ public class LogService {
 
     public List<LogGetDto> getAllLogsDto() {
 
-        List<LogEntity> logs = logRepository.findAll();
+        List<LogEntity> logs = logRepository.findAll().stream()
+                .filter(log -> Objects.equals(log.getUser().getRole().getRoleName(), "member"))
+                .collect(Collectors.toList());
 
         return ILogGetMapper.INSTANCE.logsToGetAllLogsDto(logs);
     }

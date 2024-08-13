@@ -3,6 +3,7 @@ package com.example.EtiyaSportsClub.services;
 import com.example.EtiyaSportsClub.dtos.LoginDto;
 import com.example.EtiyaSportsClub.dtos.UserGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.UserCreateDto;
+import com.example.EtiyaSportsClub.dtos.responses.UserDontHaveBundleDto;
 import com.example.EtiyaSportsClub.entities.RoleEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.mappers.IUserGetMapper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -104,5 +106,10 @@ public class UserService {
         }else{
             throw new RuntimeException("User Not Found");
         }
+    }
+
+    public List<UserDontHaveBundleDto> getUsersWithoutPurchases() {
+        List<UserEntity> users = userRepository.findUsersWithoutPurchases();
+        return IUserGetMapper.INSTANCE.usersToUsersDontHaveBundle(users);
     }
 }
