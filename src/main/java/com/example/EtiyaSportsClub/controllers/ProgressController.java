@@ -15,8 +15,7 @@ import java.util.List;
 @RequestMapping("/api/progresses")
 public class ProgressController {
 
-    @Autowired
-    ProgressService progressService;
+    private final ProgressService progressService;
 
     public ProgressController(ProgressService progressService){
         this.progressService = progressService;
@@ -36,17 +35,6 @@ public class ProgressController {
     public List<ProgressGetDto> getAllProgressByActivity(){
         return progressService.getAllProgressByActivity();
     }
-
-
-    /*@GetMapping("/{username}")
-    public ProgressForCalendar getProgressByUsername(@PathVariable String username){
-        return progressService.getProgressByUsername(username);
-    }*/
-
-    /*@PostMapping
-    public ProgressEntity createProgress(@RequestBody InitialProgressDto newProgress){
-        return progressService.createProgress(newProgress);
-    }*/
 
     @PostMapping("/initProgress")
     public ProgressEntity initProgress(@RequestBody InitialProgressDto newProgress){

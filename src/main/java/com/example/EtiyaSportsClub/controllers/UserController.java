@@ -17,10 +17,8 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private IRoleRepository roleRepository;
+    private final  UserService userService;
+    private final  IRoleRepository roleRepository;
 
     public UserController(UserService userService, IRoleRepository roleRepository){
         this.userService = userService;

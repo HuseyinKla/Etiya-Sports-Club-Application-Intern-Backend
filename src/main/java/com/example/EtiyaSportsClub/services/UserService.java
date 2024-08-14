@@ -10,7 +10,6 @@ import com.example.EtiyaSportsClub.mappers.IUserGetMapper;
 import com.example.EtiyaSportsClub.repos.IBundleRepository;
 import com.example.EtiyaSportsClub.repos.IRoleRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -20,17 +19,17 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-    @Autowired
-    private IUserRepository userRepository;
-    @Autowired
-    private IBundleRepository bundleRepository;
-    @Autowired
-    private IRoleRepository roleRepository;
-    private RoleService roleService;
+
+    private final  IUserRepository userRepository;
+    private final  IBundleRepository bundleRepository;
+    private final  IRoleRepository roleRepository;
+    private final  RoleService roleService;
 
 
-    public UserService(IUserRepository userRepository, RoleService roleService){
+    public UserService(IUserRepository userRepository, IBundleRepository bundleRepository, IRoleRepository roleRepository, RoleService roleService){
         this.userRepository = userRepository;
+        this.bundleRepository = bundleRepository;
+        this.roleRepository = roleRepository;
         this.roleService = roleService;
     }
 
@@ -109,7 +108,9 @@ public class UserService {
     }
 
     public List<UserDontHaveBundleDto> getUsersWithoutPurchases() {
-        List<UserEntity> users = userRepository.findUsersWithoutPurchases();
+        List<UserEntity> users = userRepository.findUsersWithoutPurchases().stream()
+                .filter(user -> user.getRole().getRoleName() == "member")
+                .collect(Collectors.toList());
         return IUserGetMapper.INSTANCE.usersToUsersDontHaveBundle(users);
     }
 }

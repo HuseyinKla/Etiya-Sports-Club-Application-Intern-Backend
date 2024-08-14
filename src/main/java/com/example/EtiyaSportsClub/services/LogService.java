@@ -20,10 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class LogService {
 
-    @Autowired
-    private ILogRepository logRepository;
-    @Autowired
-    private IUserRepository userRepository;
+    private final ILogRepository logRepository;
+    private final  IUserRepository userRepository;
 
     public LogService(ILogRepository logRepository, IUserRepository userRepository){
         this.logRepository = logRepository;

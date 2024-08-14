@@ -17,10 +17,8 @@ import java.util.List;
 @RequestMapping("/api/bundles")
 public class BundleController {
 
-    @Autowired
-    BundleService bundleService;
-    @Autowired
-    IUserRepository userRepository;
+    private final BundleService bundleService;
+    private final IUserRepository userRepository;
 
 
     public BundleController(BundleService bundleService, IUserRepository userRepository){
@@ -33,6 +31,11 @@ public class BundleController {
         return bundleService.getAllBundlesDto();
     }
 
+    @GetMapping("/allBundles/{username}")
+    public List<BundleGetDto> getAllBundlesDtoByUsername(@PathVariable String username){
+        return bundleService.getAllBundlesDtoByUsername(username);
+    }
+
     @GetMapping("/{bundleId}")
     public BundleGetDto getOneBundleDto(@PathVariable Long bundleId){
         return bundleService.getOneBundleDto(bundleId);
@@ -42,12 +45,6 @@ public class BundleController {
     public List<BundleCreateDto> getAdminBundles(@PathVariable String username){
         return bundleService.getAdminBundles(username);
     }
-
-
-    /*@PostMapping
-    public BundleEntity createNewBundle(@RequestBody BundleEntity newBundle){
-        return bundleService.createNewBundle(newBundle);
-    }*/
 
     @PostMapping
     public BundleCreateDto createNewBundle(@RequestBody BundleWithCoursesDTO bundleWithCoursesDTO){

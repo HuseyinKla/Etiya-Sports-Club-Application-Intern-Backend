@@ -2,9 +2,7 @@ package com.example.EtiyaSportsClub.controllers;
 
 import com.example.EtiyaSportsClub.dtos.LogGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.LogCreateDto;
-import com.example.EtiyaSportsClub.entities.LogEntity;
 import com.example.EtiyaSportsClub.services.LogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +11,9 @@ import java.util.List;
 @RequestMapping("/api/logs")
 public class LogController {
 
-    @Autowired
-    private LogService logService;
+    private final LogService logService;
 
-    public LogController(LogService logService){
+    public LogController(LogService logService) {
         this.logService = logService;
     }
 

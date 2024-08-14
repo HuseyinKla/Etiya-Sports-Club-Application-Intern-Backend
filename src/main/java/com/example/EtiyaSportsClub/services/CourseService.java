@@ -19,11 +19,8 @@ import com.example.EtiyaSportsClub.services.BundleService;
 @Service
 public class CourseService {
 
-    @Autowired
-    private ICourseRepository courseRepository;
-
-    @Autowired
-    private BundleService bundleService;
+    private final  ICourseRepository courseRepository;
+    private final  BundleService bundleService;
 
 
     public CourseService(ICourseRepository courseRepository, BundleService bundleService){

@@ -24,12 +24,9 @@ import java.util.stream.Collectors;
 @Service
 public class ProgressService {
 
-    @Autowired
-    IProgressRepository progressRepository;
-    @Autowired
-    IUserRepository userRepository;
-    @Autowired
-    IBundleRepository bundleRepository;
+    private final IProgressRepository progressRepository;
+    private final IUserRepository userRepository;
+    private final IBundleRepository bundleRepository;
 
 
 
@@ -55,28 +52,6 @@ public class ProgressService {
             throw new RuntimeException("Progress not found");
         }
     }
-
-    /*public ProgressEntity createProgress(InitialProgressDto newProgress) {
-
-        Optional<UserEntity> foundedUser = userRepository.findByUserName(newProgress.getUsername());
-        if (foundedUser.isPresent()){
-            ProgressDto newProgressDto = new ProgressDto();
-
-            newProgressDto.setUserId(foundedUser.get().getUserId());
-            newProgressDto.setProcessStatus(newProgress.getProcessStatus());
-            newProgressDto.setBundleId(newProgress.getBundleId());
-            newProgressDto.setRemainingCourseNumber(newProgress.getRemainingCourseNumber());
-
-            ProgressEntity newProgressEntity = IProgressGetMapper.INSTANCE.initialProgressDtoToProgressEntity(newProgressDto);
-            return progressRepository.save(newProgressEntity);
-        }else{
-            throw new RuntimeException("User not found");
-        }
-
-
-    }*/
-
-
 
     public ProgressEntity updateProgress(Long progressId, ProgressEntity newProgress) {
         Optional<ProgressEntity> progress = progressRepository.findById(progressId);

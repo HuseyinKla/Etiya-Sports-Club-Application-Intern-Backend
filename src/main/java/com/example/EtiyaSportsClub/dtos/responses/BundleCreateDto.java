@@ -18,4 +18,5 @@ public class BundleCreateDto {
     private int totalLessonNumber;
     private List<CourseCreateDto> courses;
 
+
 }
