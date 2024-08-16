@@ -16,8 +16,6 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
     Optional<UserEntity> findByUserName(String username);
 
 
-    @Query("""
-            SELECT u FROM UserEntity u LEFT JOIN PurchaseEntity p ON u.userId = p.user.userId WHERE p.purchaseId IS NULL
-            """)
+    @Query("SELECT u FROM UserEntity u LEFT JOIN PurchaseEntity p ON u.userId = p.user.userId WHERE p.purchaseId IS NULL")
     List<UserEntity> findUsersWithoutPurchases();
 }
