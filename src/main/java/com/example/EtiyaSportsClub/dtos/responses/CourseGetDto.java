@@ -1,4 +1,4 @@
-package com.example.EtiyaSportsClub.dtos;
+package com.example.EtiyaSportsClub.dtos.responses;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

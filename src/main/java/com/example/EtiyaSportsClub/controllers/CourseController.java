@@ -1,7 +1,7 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.CourseGetDto;
-import com.example.EtiyaSportsClub.dtos.CoursesByBundleIdDto;
+import com.example.EtiyaSportsClub.dtos.responses.CourseGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.CoursesByBundleIdDto;
 import com.example.EtiyaSportsClub.entities.CourseEntity;
 import com.example.EtiyaSportsClub.services.CourseService;
 import org.springframework.web.bind.annotation.*;

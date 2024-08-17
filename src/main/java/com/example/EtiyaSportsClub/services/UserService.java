@@ -1,7 +1,7 @@
 package com.example.EtiyaSportsClub.services;
 
-import com.example.EtiyaSportsClub.dtos.LoginDto;
-import com.example.EtiyaSportsClub.dtos.UserGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.LoginDto;
+import com.example.EtiyaSportsClub.dtos.responses.UserGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.UserCreateDto;
 import com.example.EtiyaSportsClub.dtos.responses.UserDontHaveBundleDto;
 import com.example.EtiyaSportsClub.entities.RoleEntity;
@@ -24,7 +24,6 @@ public class UserService {
     private final  IBundleRepository bundleRepository;
     private final  IRoleRepository roleRepository;
     private final  RoleService roleService;
-
 
     public UserService(IUserRepository userRepository, IBundleRepository bundleRepository, IRoleRepository roleRepository, RoleService roleService){
         this.userRepository = userRepository;

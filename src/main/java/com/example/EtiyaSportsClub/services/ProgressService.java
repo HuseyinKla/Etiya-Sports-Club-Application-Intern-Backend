@@ -1,9 +1,8 @@
 package com.example.EtiyaSportsClub.services;
 
-import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
 import com.example.EtiyaSportsClub.dtos.requests.ProgressBundleDto;
-import com.example.EtiyaSportsClub.dtos.requests.ProgressDto;
+import com.example.EtiyaSportsClub.dtos.responses.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;
@@ -12,7 +11,6 @@ import com.example.EtiyaSportsClub.mappers.IProgressGetMapper;
 import com.example.EtiyaSportsClub.repos.IBundleRepository;
 import com.example.EtiyaSportsClub.repos.IProgressRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

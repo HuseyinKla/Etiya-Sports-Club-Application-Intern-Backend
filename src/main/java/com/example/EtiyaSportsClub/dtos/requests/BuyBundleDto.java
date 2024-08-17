@@ -1,4 +1,5 @@
-package com.example.EtiyaSportsClub.dtos;
+package com.example.EtiyaSportsClub.dtos.requests;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,12 +10,14 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LogGetDto {
+public class BuyBundleDto {
 
-    private Long logId;
     private String username;
-    private Timestamp logDate;
-    private String action;
+    private Long bundleId;
+    private Timestamp purchaseDate;
+    private int totalLessonNumber;
+
+
 
 
 }

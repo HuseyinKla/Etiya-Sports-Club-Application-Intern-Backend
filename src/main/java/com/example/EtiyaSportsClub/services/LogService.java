@@ -1,17 +1,16 @@
 package com.example.EtiyaSportsClub.services;
 
-import com.example.EtiyaSportsClub.dtos.LogGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.LogGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.LogCreateDto;
 import com.example.EtiyaSportsClub.entities.LogEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.mappers.ILogGetMapper;
 import com.example.EtiyaSportsClub.repos.ILogRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;

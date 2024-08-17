@@ -1,8 +1,7 @@
 package com.example.EtiyaSportsClub.mappers;
 
-import com.example.EtiyaSportsClub.dtos.BundleGetDto;
-import com.example.EtiyaSportsClub.dtos.requests.BundleWithCoursesDTO;
 import com.example.EtiyaSportsClub.dtos.responses.BundleCreateDto;
+import com.example.EtiyaSportsClub.dtos.responses.BundleGetDto;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

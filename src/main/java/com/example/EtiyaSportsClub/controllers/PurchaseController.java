@@ -1,8 +1,8 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.BundlesByUserId;
-import com.example.EtiyaSportsClub.dtos.BuyBundleDto;
-import com.example.EtiyaSportsClub.dtos.PurchaseGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.BuyBundleDto;
+import com.example.EtiyaSportsClub.dtos.responses.BundlesByUserId;
+import com.example.EtiyaSportsClub.dtos.responses.PurchaseGetDto;
 import com.example.EtiyaSportsClub.entities.PurchaseEntity;
 import com.example.EtiyaSportsClub.services.ProgressService;
 import com.example.EtiyaSportsClub.services.PurchaseService;

@@ -1,17 +1,15 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.LoginDto;
-import com.example.EtiyaSportsClub.dtos.UserGetDto;
+import com.example.EtiyaSportsClub.dtos.requests.LoginDto;
 import com.example.EtiyaSportsClub.dtos.requests.UserCreateDto;
 import com.example.EtiyaSportsClub.dtos.responses.UserDontHaveBundleDto;
+import com.example.EtiyaSportsClub.dtos.responses.UserGetDto;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.repos.IRoleRepository;
 import com.example.EtiyaSportsClub.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")

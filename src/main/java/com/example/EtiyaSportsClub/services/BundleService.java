@@ -1,7 +1,7 @@
 package com.example.EtiyaSportsClub.services;
 
-import com.example.EtiyaSportsClub.dtos.BundleGetDto;
 import com.example.EtiyaSportsClub.dtos.responses.BundleCreateDto;
+import com.example.EtiyaSportsClub.dtos.responses.BundleGetDto;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
 import com.example.EtiyaSportsClub.entities.CourseEntity;
 import com.example.EtiyaSportsClub.entities.PurchaseEntity;
@@ -11,7 +11,6 @@ import com.example.EtiyaSportsClub.repos.IBundleRepository;
 import com.example.EtiyaSportsClub.repos.ICourseRepository;
 import com.example.EtiyaSportsClub.repos.IPurchaseRepository;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

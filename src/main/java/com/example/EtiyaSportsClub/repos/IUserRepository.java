@@ -1,6 +1,5 @@
 package com.example.EtiyaSportsClub.repos;
 
-import com.example.EtiyaSportsClub.dtos.UserGetDto;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

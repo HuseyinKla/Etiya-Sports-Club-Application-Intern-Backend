@@ -1,9 +1,8 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.RoleGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.RoleGetDto;
 import com.example.EtiyaSportsClub.entities.RoleEntity;
 import com.example.EtiyaSportsClub.services.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

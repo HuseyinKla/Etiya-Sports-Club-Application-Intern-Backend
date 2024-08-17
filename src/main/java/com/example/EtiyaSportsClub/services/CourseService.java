@@ -1,19 +1,17 @@
 package com.example.EtiyaSportsClub.services;
 
-import com.example.EtiyaSportsClub.dtos.BundleGetDto;
-import com.example.EtiyaSportsClub.dtos.CourseDtoForBundleId;
-import com.example.EtiyaSportsClub.dtos.CourseGetDto;
-import com.example.EtiyaSportsClub.dtos.CoursesByBundleIdDto;
 import com.example.EtiyaSportsClub.entities.CourseEntity;
 import com.example.EtiyaSportsClub.mappers.ICourseGetMapper;
 import com.example.EtiyaSportsClub.repos.ICourseRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.EtiyaSportsClub.dtos.responses.CourseDtoForBundleId;
+import com.example.EtiyaSportsClub.dtos.responses.CourseGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.CoursesByBundleIdDto;
+import com.example.EtiyaSportsClub.dtos.responses.BundleGetDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import com.example.EtiyaSportsClub.services.BundleService;
 
 
 @Service

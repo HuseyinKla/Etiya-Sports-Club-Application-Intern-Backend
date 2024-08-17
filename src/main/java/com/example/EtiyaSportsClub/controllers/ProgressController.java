@@ -1,12 +1,11 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.ProgressGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.InitialProgressDto;
 import com.example.EtiyaSportsClub.dtos.requests.ProgressBundleDto;
 import com.example.EtiyaSportsClub.dtos.responses.ProgressForCalendar;
+import com.example.EtiyaSportsClub.dtos.responses.ProgressGetDto;
 import com.example.EtiyaSportsClub.entities.ProgressEntity;
 import com.example.EtiyaSportsClub.services.ProgressService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

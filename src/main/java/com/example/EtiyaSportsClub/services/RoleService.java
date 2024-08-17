@@ -1,10 +1,9 @@
 package com.example.EtiyaSportsClub.services;
 
-import com.example.EtiyaSportsClub.dtos.RoleGetDto;
 import com.example.EtiyaSportsClub.entities.RoleEntity;
 import com.example.EtiyaSportsClub.mappers.IRoleGetMapper;
 import com.example.EtiyaSportsClub.repos.IRoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.EtiyaSportsClub.dtos.responses.RoleGetDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

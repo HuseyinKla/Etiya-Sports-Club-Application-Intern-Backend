@@ -1,10 +1,9 @@
 package com.example.EtiyaSportsClub.mappers;
 
 
-import com.example.EtiyaSportsClub.dtos.RoleGetDto;
 import com.example.EtiyaSportsClub.entities.RoleEntity;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.example.EtiyaSportsClub.dtos.responses.RoleGetDto;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

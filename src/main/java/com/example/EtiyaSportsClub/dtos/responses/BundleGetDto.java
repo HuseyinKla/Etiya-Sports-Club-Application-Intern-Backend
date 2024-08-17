@@ -1,21 +1,22 @@
-package com.example.EtiyaSportsClub.dtos;
+package com.example.EtiyaSportsClub.dtos.responses;
 
-
+import com.example.EtiyaSportsClub.entities.UserEntity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CoursesByBundleIdDto {
+public class BundleGetDto {
 
     private Long bundleId;
+    private Long userId;
+    private String name;
     private String bundleName;
     private String bundleDescription;
+    private double bundlePrice;
     private int totalLessonNumber;
-    private List<CourseDtoForBundleId> courses;
 
 }

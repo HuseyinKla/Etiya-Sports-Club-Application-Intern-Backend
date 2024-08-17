@@ -1,14 +1,13 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.BundleGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.BundleWithCoursesDTO;
 import com.example.EtiyaSportsClub.dtos.responses.BundleCreateDto;
+import com.example.EtiyaSportsClub.dtos.responses.BundleGetDto;
 import com.example.EtiyaSportsClub.entities.BundleEntity;
 import com.example.EtiyaSportsClub.entities.CourseEntity;
 import com.example.EtiyaSportsClub.entities.UserEntity;
 import com.example.EtiyaSportsClub.repos.IUserRepository;
 import com.example.EtiyaSportsClub.services.BundleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.example.EtiyaSportsClub.controllers;
 
-import com.example.EtiyaSportsClub.dtos.LogGetDto;
 import com.example.EtiyaSportsClub.dtos.requests.LogCreateDto;
+import com.example.EtiyaSportsClub.dtos.responses.LogGetDto;
 import com.example.EtiyaSportsClub.services.LogService;
 import org.springframework.web.bind.annotation.*;
 

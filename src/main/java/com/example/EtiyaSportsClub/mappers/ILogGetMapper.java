@@ -1,6 +1,6 @@
 package com.example.EtiyaSportsClub.mappers;
 
-import com.example.EtiyaSportsClub.dtos.LogGetDto;
+import com.example.EtiyaSportsClub.dtos.responses.LogGetDto;
 import com.example.EtiyaSportsClub.entities.LogEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
